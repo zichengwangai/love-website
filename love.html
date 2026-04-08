@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我们的恋爱纪念</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 font-size=%2290%22>❤️</text></svg>">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B8B',
+            secondary: '#2A2A2A',
+            light: '#FFFFFF',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 10px rgba(255, 107, 139, 0.3);
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #fff0f3 0%, #ffffff 100%);
+      }
+      .carousel-item {
+        display: none;
+      }
+      .carousel-item.active {
+        display: flex;
+        animation: fade 0.8s ease-in-out;
+      }
+      .heart {
+        position: fixed;
+        pointer-events: none;
+        animation: heartFly 1s ease-out forwards;
+      }
+      .btn-hover {
+        transition: all 0.3s ease;
+      }
+      .btn-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(255, 107, 139, 0.2);
+      }
+      @keyframes fade {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      @keyframes heartFly {
+        to {
+          transform: translateY(-50px) rotate(20deg);
+          opacity: 0;
+        }
+      }
+      .progress-bar {
+        height: 4px;
+        transition: width 0.3s linear;
+      }
+      .volume-slider {
+        -webkit-appearance: none;
+        height: 4px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+      }
+      .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #FF6B8B;
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+<body class="gradient-bg min-h-screen flex flex-col text-secondary overflow-x-hidden">
+  <div id="musicController" class="fixed bottom-6 left-6 z-50 bg-white/90 backdrop-blur-md p-3 rounded-full shadow-lg flex items-center gap-3">
+    <button id="musicBtn" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center btn-hover">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+      </svg>
+    </button>
+    <input type="range" id="volumeControl" class="volume-slider w-16 hidden sm:block" min="0" max="100" value="70">
+    <input type="file" id="musicUpload" accept="audio/mp3" class="hidden">
+    <label for="musicUpload" class="cursor-pointer text-primary btn-hover">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 16a1 1 0 01-1 1h-1a2 2 0 00-2 2v1a1 1 0 01-1 1H8a1 1 0 01-1-1v-1a2 2 0 00-2-2H5a1 1 0 01-1-1v-1z"></path>
+      </svg>
+    </label>
+  </div>
+
+  <div class="container mx-auto px-4 py-8 flex-1 flex flex-col max-w-6xl">
+    <header class="text-center mb-8 sm:mb-12">
+      <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-primary text-shadow mb-2">我们的恋爱纪念</h1>
+      <p class="text-[clamp(1rem,3vw,1.5rem)] text-secondary/80 mb-2">Forever Love</p>
+      <div class="inline-block bg-primary/10 px-6 py-3 rounded-full">
+        <p class="text-secondary font-medium">我们已经相恋 <span id="loveDays" class="text-primary font-bold text-xl">0</span> 天</p>
+      </div>
+    </header>
+
+    <main class="flex-1 flex flex-col items-center justify-center mb-8">
+      <div id="carousel" class="w-full max-w-4xl h-[50vh] sm:h-[60vh] bg-white rounded-2xl shadow-xl overflow-hidden relative mb-6">
+        <div id="carouselInner" class="w-full h-full flex items-center justify-center">
+          <div class="text-center text-secondary/50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <p>点击下方上传照片或视频</p>
+          </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/40 to-transparent">
+          <div class="w-full bg-white/30 rounded-full overflow-hidden mb-2">
+            <div id="carouselProgress" class="progress-bar bg-primary w-0"></div>
+          </div>
+          <div class="flex justify-center gap-4">
+            <button id="prevBtn" class="w-10 h-10 rounded-full bg-white/80 text-secondary flex items-center justify-center btn-hover">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-white/80 text-secondary flex items-center justify-center btn-hover">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </button>
+            <button id="nextBtn" class="w-10 h-10 rounded-full bg-white/80 text-secondary flex items-center justify-center btn-hover">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-4 flex-wrap justify-center">
+        <input type="file" id="mediaUpload" accept="image/*,video/mp4" multiple class="hidden">
+        <label for="mediaUpload" class="bg-primary text-white px-6 py-3 rounded-full font-medium flex items-center gap-2 cursor-pointer btn-hover shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          上传照片/视频
+        </label>
+        <button id="clearBtn" class="bg-white text-primary border border-primary px-6 py-3 rounded-full font-medium flex items-center gap-2 btn-hover">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+          </svg>
+          清空所有
+        </button>
+      </div>
+    </main>
+
+    <footer class="text-center text-secondary/60 text-sm py-4">
+      <p>❤️ 2025.02.22 始于心动，终于白首 ❤️</p>
+    </footer>
+  </div>
+
+  <script>
+    const CONFIG = {
+      LOVE_START_DATE: "2025-02-22",
+      CAROUSEL_INTERVAL: 5000,
+      AUTO_PLAY: true
+    };
+
+    let mediaList = JSON.parse(localStorage.getItem('coupleMedia')) || [];
+    let currentIndex = 0;
+    let carouselInterval;
+    let isPlaying = CONFIG.AUTO_PLAY;
+    let audioPlayer = new Audio();
+    let isMusicPlaying = false;
+
+    const carouselInner = document.getElementById('carouselInner');
+    const carouselProgress = document.getElementById('carouselProgress');
+    const mediaUpload = document.getElementById('mediaUpload');
+    const musicUpload = document.getElementById('musicUpload');
+    const musicBtn = document.getElementById('musicBtn');
+    const volumeControl = document.getElementById('volumeControl');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      calculateLoveDays();
+      renderCarousel();
+      initCarousel();
+      initMusic();
+      initHeartEffect();
+    });
+
+    function calculateLoveDays() {      const start = new Date(CONFIG.LOVE_START_DATE);
+      const now = new Date();
+      const diffTime = now - start;
+      const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById('loveDays').textContent = Math.max(0, days);
+    }
+
+    mediaUpload.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (!files.length) return;
+
+      for (let file of files) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const mediaData = {
+            id: Date.now() + Math.random(),
+            type: file.type.startsWith('image') ? 'image' : 'video',
+            url: event.target.result
+          };
+          mediaList.push(mediaData);
+          localStorage.setItem('coupleMedia', JSON.stringify(mediaList));
+          renderCarousel();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function renderCarousel() {
+      if (mediaList.length === 0) {
+        carouselInner.innerHTML = `
+          <div class="text-center text-secondary/50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <p>点击下方上传照片或视频</p>
+          </div>
+        `;
+        return;
+      }
+
+      carouselInner.innerHTML = '';
+      mediaList.forEach((media, index) => {
+        const div = document.createElement('div');
+        div.className = `carousel-item w-full h-full ${index === currentIndex ? 'active' : ''}`;
+        div.innerHTML = media.type === 'image'
+          ? `<img src="${media.url}" class="w-full h-full object-contain">`
+          : `<video src="${media.url}" class="w-full h-full object-contain" controls></video>`;
+        carouselInner.appendChild(div);
+      });
+      updateProgress();
+    }
+
+    function initCarousel() {
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const clearBtn = document.getElementById('clearBtn');
+
+      prevBtn.addEventListener('click', () => {
+        changeSlide(currentIndex - 1);
+        resetInterval();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        changeSlide(currentIndex + 1);
+        resetInterval();
+      });
+
+      playPauseBtn.addEventListener('click', togglePlayPause);
+
+      clearBtn.addEventListener('click', () => {
+        if (confirm('确定清空所有媒体？')) {
+          mediaList = [];
+          localStorage.removeItem('coupleMedia');
+          currentIndex = 0;
+          renderCarousel();
+        }
+      });
+
+      if (CONFIG.AUTO_PLAY) startCarousel();
+    }
+
+    function changeSlide(index) {
+      if (mediaList.length === 0) return;
+      currentIndex = (index + mediaList.length) % mediaList.length;
+      document.querySelectorAll('.carousel-item').forEach((item, i) => {
+        item.classList.toggle('active', i === currentIndex);
+      });
+      updateProgress();
+    }
+
+    function startCarousel() {
+      if (mediaList.length <= 1) return;
+      carouselInterval = setInterval(() => {
+        changeSlide(currentIndex + 1);
+      }, CONFIG.CAROUSEL_INTERVAL);
+    }
+
+    function resetInterval() {
+      clearInterval(carouselInterval);
+      if (isPlaying) startCarousel();
+    }
+
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('playPauseBtn');
+      if (isPlaying) {
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+        startCarousel();
+      } else {
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+        clearInterval(carouselInterval);
+      }
+    }
+
+    function updateProgress() {
+      if (mediaList.length === 0) { carouselProgress.style.width = '0%'; return; }
+      const percent = ((currentIndex + 1) / mediaList.length) * 100;
+      carouselProgress.style.width = `${percent}%`;
+    }
+
+    function initMusic() {
+      volumeControl.value = localStorage.getItem('musicVolume') || 70;
+      audioPlayer.volume = volumeControl.value / 100;
+      audioPlayer.loop = true;
+
+      const saved = localStorage.getItem('coupleMusic');
+      if (saved) audioPlayer.src = saved;
+
+      musicBtn.addEventListener('click', toggleMusic);
+      volumeControl.addEventListener('input', () => {
+        audioPlayer.volume = volumeControl.value / 100;
+        localStorage.setItem('musicVolume', volumeControl.value);
+      });
+
+      musicUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const url = ev.target.result;
+          localStorage.setItem('coupleMusic', url);
+          audioPlayer.src = url;
+          audioPlayer.play();
+          isMusicPlaying = true;
+          updateMusicBtn();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function toggleMusic() {
+      if (!audioPlayer.src) { alert('请先上传MP3背景音乐'); return; }
+      if (isMusicPlaying) audioPlayer.pause();
+      else audioPlayer.play();
+      isMusicPlaying = !isMusicPlaying;
+      updateMusicBtn();
+    }
+
+    function updateMusicBtn() {
+      musicBtn.innerHTML = isMusicPlaying
+        ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>`;
+    }
+
+    function initHeartEffect() {
+      document.addEventListener('click', createHeart);
+      let last = 0;
+      document.addEventListener('mousemove', (e) => {
+        if (Date.now() - last > 300) {
+          createHeart(e);
+          last = Date.now();
+        }
+      });
+    }
+
+    function createHeart(e) {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.innerHTML = '❤️';
+      h.style.left = e.clientX - 10 + 'px';
+      h.style.top = e.clientY - 10 + 'px';
+      h.style.fontSize = Math.random() * 10 + 10 + 'px';
+      h.style.color = '#FF6B8B';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1000);
+    }
+  </script>
+</body>
+</html>
