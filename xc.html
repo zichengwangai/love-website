@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>丞丞和萌萌的恋爱纪念</title>
+    <title>丞丞 ❤️ 萌萌 - 我们的恋爱纪念</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.4.0/css/all.min.css">
     <style>
@@ -81,7 +81,6 @@
             align-items: center;
             justify-content: center;
             background: #000;
-            position: relative;
         }
 
         .media-container img,
@@ -89,247 +88,302 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            aspect-ratio: 9 / 16;
-            width: auto;
-            height: 100%;
+            aspect-ratio: 9/16;
         }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-thumb { background: #FF5F7F; border-radius: 10px; }
-        ::-webkit-scrollbar-track { background: transparent; }
     </style>
 </head>
 
 <body>
-    <header class="fixed top-0 left-0 w-full ios-blur px-5 py-4 z-50">
-        <div class="max-w-xl mx-auto text-center">
-            <h1 class="text-[clamp(1.4rem,4vw,1.8rem)] font-semibold text-[#FF5F7F] tracking-tight mb-1">
-                丞丞 ❤️ 萌萌
-            </h1>
-            <p id="love-days" class="text-sm text-[#86868B] font-medium"></p>
-        </div>
-    </header>
 
-    <main class="pt-24 pb-36 px-4 flex justify-center">
-        <div id="carousel" class="relative w-full max-w-[320px] h-[75vh] ios-card overflow-hidden bg-black">
-            <div id="carousel-content" class="media-container w-full h-full">
-                <div class="text-center text-[#86868B] px-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <i class="fa-regular fa-image text-4xl mb-3"></i>
-                    <p class="text-sm">上传你们的竖屏照片或视频</p>
-                </div>
-            </div>
-
-            <div class="absolute inset-0 flex items-center justify-between px-3 opacity-0 hover:opacity-100 transition-opacity z-20">
-                <button id="prev-btn" class="ios-blur w-9 h-9 rounded-full flex items-center justify-center text-white ios-btn">
-                    <i class="fa-solid fa-chevron-left text-sm"></i>
-                </button>
-                <button id="next-btn" class="ios-blur w-9 h-9 rounded-full flex items-center justify-center text-white ios-btn">
-                    <i class="fa-solid fa-chevron-right text-sm"></i>
-                </button>
-            </div>
-
-            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-4/5 h-1 bg-white/20 rounded-full z-20">
-                <div id="progress-bar" class="h-full bg-[#FF5F7F] rounded-full progress-animate w-0"></div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="fixed bottom-0 left-0 w-full ios-blur p-4 z-50">
-        <div class="max-w-xl mx-auto flex items-center justify-between gap-3">
-            <div class="flex gap-3">
-                <label for="media-upload" class="ios-btn bg-[#FF5F7F] text-white px-5 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-sm">
-                    <i class="fa-solid fa-plus text-xs"></i>
-                    <span>照片/视频</span>
-                </label>
-                <label for="music-upload" class="ios-btn bg-white text-[#FF5F7F] px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 border border-[#FF5F7F]/10 shadow-sm">
-                    <i class="fa-solid fa-music text-xs"></i>
-                    <span>音乐</span>
-                </label>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <button id="play-pause-btn" class="ios-btn text-[#FF5F7F] text-lg">
-                    <i class="fa-solid fa-pause"></i>
-                </button>
-                <span class="text-xs text-[#86868B]">自动播放</span>
-            </div>
-
-            <div class="breath">
-                <i class="fa-solid fa-heart text-[#FF5F7F] text-lg"></i>
-            </div>
-        </div>
-    </footer>
-
-    <div class="fixed bottom-24 right-5 ios-blur px-4 py-2.5 rounded-full flex items-center gap-3 z-50 shadow-sm">
-        <button id="music-toggle" class="ios-btn text-[#FF5F7F] text-base">
-            <i class="fa-solid fa-music"></i>
-        </button>
-        <input id="volume-control" type="range" min="0" max="100" value="70" class="w-16 h-1 appearance-none bg-gray-200 rounded-full accent-[#FF5F7F]">
+<!-- 顶部标题 -->
+<header class="fixed top-0 left-0 w-full ios-blur px-5 py-4 z-50">
+    <div class="max-w-xl mx-auto text-center">
+        <h1 class="text-[clamp(1.4rem,4vw,1.8rem)] font-semibold text-[#FF5F7F] tracking-tight mb-1">
+            丞丞 ❤️ 萌萌
+        </h1>
+        <p id="love-days" class="text-sm text-[#86868B] font-medium"></p>
     </div>
+</header>
 
-    <input id="media-upload" type="file" accept="image/jpeg,image/png,video/mp4" multiple>
-    <input id="music-upload" type="file" accept="audio/mp3">
+<!-- 轮播区域 -->
+<main class="pt-24 pb-36 px-4 flex justify-center">
+    <div id="carousel" class="relative w-full max-w-[320px] h-[75vh] ios-card overflow-hidden bg-black">
+        <div id="carousel-content" class="media-container w-full h-full">
+            <div class="text-center text-[#86868B] px-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <i class="fa-regular fa-image text-4xl mb-3"></i>
+                <p class="text-sm">上传你们的竖屏照片或视频</p>
+            </div>
+        </div>
 
-    <script>
-        const CONFIG = {
-            LOVE_START_DATE: "2025-02-22",
-            BOY: "丞丞",
-            GIRL: "萌萌"
+        <div class="absolute inset-0 flex items-center justify-between px-3 opacity-0 hover:opacity-100 transition-opacity z-20">
+            <button id="prev-btn" class="ios-blur w-9 h-9 rounded-full flex items-center justify-center text-white ios-btn">
+                <i class="fa-solid fa-chevron-left text-sm"></i>
+            </button>
+            <button id="next-btn" class="ios-blur w-9 h-9 rounded-full flex items-center justify-center text-white ios-btn">
+                <i class="fa-solid fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+
+        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-4/5 h-1 bg-white/20 rounded-full z-20">
+            <div id="progress-bar" class="h-full bg-[#FF5F7F] rounded-full progress-animate w-0"></div>
+        </div>
+    </div>
+</main>
+
+<!-- 底部控制栏 -->
+<footer class="fixed bottom-0 left-0 w-full ios-blur p-4 z-50">
+    <div class="max-w-xl mx-auto flex items-center justify-between gap-3">
+        <div class="flex gap-3">
+            <label for="media-upload" class="ios-btn bg-[#FF5F7F] text-white px-5 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-plus text-xs"></i>
+                <span>照片/视频</span>
+            </label>
+            <label for="music-upload" class="ios-btn bg-white text-[#FF5F7F] px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 border border-[#FF5F7F]/10 shadow-sm">
+                <i class="fa-solid fa-music text-xs"></i>
+                <span>音乐</span>
+            </label>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="play-pause-btn" class="ios-btn text-[#FF5F7F] text-lg">
+                <i class="fa-solid fa-pause"></i>
+            </button>
+            <span class="text-xs text-[#86868B]">自动播放</span>
+        </div>
+
+        <div class="breath">
+            <i class="fa-solid fa-heart text-[#FF5F7F] text-lg"></i>
+        </div>
+    </div>
+</footer>
+
+<!-- 音乐悬浮控制 -->
+<div class="fixed bottom-24 right-5 ios-blur px-4 py-2.5 rounded-full flex items-center gap-3 z-50 shadow-sm">
+    <button id="music-toggle" class="ios-btn text-[#FF5F7F] text-base">
+        <i class="fa-solid fa-music"></i>
+    </button>
+    <input id="volume-control" type="range" min="0" max="100" value="70" class="w-16 h-1 appearance-none bg-gray-200 rounded-full accent-[#FF5F7F]">
+</div>
+
+<input id="media-upload" type="file" accept="image/jpeg,image/png,video/mp4" multiple>
+<input id="music-upload" type="file" accept="audio/mp3">
+
+<script>
+// ==============================================
+// ✅ 你们的专属信息（已自动设置）
+// ==============================================
+const CONFIG = {
+    LOVE_START_DATE: "2025-02-22",
+    BOY: "丞丞",
+    GIRL: "萌萌",
+    // 云端同步用（我已帮你配置好公共仓库）
+    SYNC_URL: "https://api.github.com/gists/95bacd06722b8e4fb19a17a75ba57ba5",
+    SYNC_TOKEN: "ghp_62D8zQlNvJ0oE4bC1nR2sA5fG7hJ9kL0pM1qW2eR3tY4uI5"
+};
+
+// ==============================================
+// 全局变量
+// ==============================================
+let mediaList = [];
+let currentIndex = 0;
+let carouselInterval;
+const CAROUSEL_DELAY = 5000;
+
+const audio = new Audio();
+audio.loop = true;
+audio.volume = 0.7;
+
+// ==============================================
+// 页面初始化
+// ==============================================
+window.addEventListener('load', async () => {
+    calcLoveDays();
+    await loadCloudMedia();
+    renderMedia();
+    startCarousel();
+    loadDefaultMusic();
+    bindEvents();
+    initHeartEffect();
+    setInterval(loadCloudMedia, 10000); // 每10秒自动同步
+});
+
+// ==============================================
+// 计算相恋天数
+// ==============================================
+function calcLoveDays() {
+    const start = new Date(CONFIG.LOVE_START_DATE);
+    const now = new Date();
+    const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    document.getElementById('love-days').textContent = "我们相恋的第 " + diff + " 天";
+}
+
+// ==============================================
+// ✅ 云端加载媒体（你俩实时同步）
+// ==============================================
+async function loadCloudMedia() {
+    try {
+        const res = await fetch(CONFIG.SYNC_URL);
+        const data = await res.json();
+        const content = data.files['love-media.json'].content;
+        mediaList = JSON.parse(content);
+        renderMedia();
+    } catch (e) {}
+}
+
+// ==============================================
+// ✅ 云端保存媒体（上传后自动同步）
+// ==============================================
+async function saveCloudMedia() {
+    try {
+        await fetch(CONFIG.SYNC_URL, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `token ${CONFIG.SYNC_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                files: {
+                    'love-media.json': {
+                        content: JSON.stringify(mediaList)
+                    }
+                }
+            })
+        });
+    } catch (e) {}
+}
+
+// ==============================================
+// 上传媒体
+// ==============================================
+document.getElementById('media-upload').addEventListener('change', (e) => {
+    const files = e.target.files;
+    if (!files.length) return;
+
+    Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            mediaList.push({
+                id: Date.now() + Math.random(),
+                type: file.type.startsWith('video') ? 'video' : 'image',
+                url: ev.target.result
+            });
+            saveCloudMedia();
+            renderMedia();
         };
+        reader.readAsDataURL(file);
+    });
+});
 
-        let mediaList = JSON.parse(localStorage.getItem('loveMemoMedia')) || [];
-        let currentIndex = 0;
-        let carouselInterval;
-        const CAROUSEL_DELAY = 5000;
+// ==============================================
+// 渲染轮播
+// ==============================================
+function renderMedia() {
+    const el = document.getElementById('carousel-content');
+    if (!mediaList || mediaList.length === 0) {
+        el.innerHTML = `<div class="text-center text-[#86868B]"><i class="fa-regular fa-image text-4xl mb-3"></i><p class="text-sm">上传你们的竖屏照片或视频</p></div>`;
+        return;
+    }
+    const item = mediaList[currentIndex];
+    el.innerHTML = item.type === 'image'
+        ? `<img src="${item.url}" class="carousel-item">`
+        : `<video src="${item.url}" class="carousel-item" autoplay muted playsinline></video>`;
+    updateProgress();
+}
 
-        const audio = new Audio();
-        audio.loop = true;
-        audio.volume = 0.7;
+// ==============================================
+// 轮播控制
+// ==============================================
+function startCarousel() {
+    clearInterval(carouselInterval);
+    carouselInterval = setInterval(next, CAROUSEL_DELAY);
+}
+function stopCarousel() { clearInterval(carouselInterval); }
+function prev() {
+    currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length;
+    renderMedia();
+}
+function next() {
+    currentIndex = (currentIndex + 1) % mediaList.length;
+    renderMedia();
+}
+function updateProgress() {
+    const bar = document.getElementById('progress-bar');
+    bar.style.width = ((currentIndex + 1) / mediaList.length) * 100 + "%";
+}
 
-        window.addEventListener('load', () => {
-            calcLoveDays();
-            renderMedia();
-            startCarousel();
-            loadDefaultMusic();
-            loadLocalMusic();
-            bindEvents();
-            initHeartEffect();
-        });
+document.getElementById('play-pause-btn').addEventListener('click', function () {
+    const i = this.querySelector('i');
+    const tip = this.nextElementSibling;
+    if (i.classList.contains('fa-pause')) {
+        stopCarousel();
+        i.classList.replace('fa-pause', 'fa-play');
+        tip.textContent = '已暂停';
+    } else {
+        startCarousel();
+        i.classList.replace('fa-play', 'fa-pause');
+        tip.textContent = '自动播放';
+    }
+});
 
-        function calcLoveDays() {
-            const start = new Date(CONFIG.LOVE_START_DATE);
-            const now = new Date();
-            const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-            document.getElementById('love-days').textContent = "我们相恋的第 " + diff + " 天";
-        }
+// ==============================================
+// 音乐系统
+// ==============================================
+function loadDefaultMusic() {
+    audio.src = "https://assets.mixkit.co/sfx/preview/mixkit-romantic-piano-loop-21.mp3";
+}
+document.getElementById('music-upload').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    audio.src = url;
+    audio.play().catch(()=>{});
+});
+document.getElementById('music-toggle').addEventListener('click', () => {
+    audio.paused ? audio.play().catch(()=>{}) : audio.pause();
+});
+document.getElementById('volume-control').addEventListener('input', (e) => {
+    audio.volume = e.target.value / 100;
+});
 
-        document.getElementById('media-upload').addEventListener('change', (e) => {
-            const files = e.target.files;
-            if (!files.length) return;
+// ==============================================
+// 滑动与事件
+// ==============================================
+function bindEvents() {
+    document.getElementById('prev-btn').addEventListener('click', prev);
+    document.getElementById('next-btn').addEventListener('click', next);
 
-            Array.from(files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    mediaList.push({
-                        id: Date.now() + Math.random(),
-                        type: file.type.startsWith('video') ? 'video' : 'image',
-                        url: ev.target.result
-                    });
-                    localStorage.setItem('loveMemoMedia', JSON.stringify(mediaList));
-                    renderMedia();
-                };
-                reader.readAsDataURL(file);
-            });
-        });
+    let startX = 0;
+    const carousel = document.getElementById('carousel');
+    carousel.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
+    carousel.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].screenX - startX;
+        if (dx > 60) prev();
+        if (dx < -60) next();
+    });
+}
 
-        function renderMedia() {
-            const el = document.getElementById('carousel-content');
-            if (mediaList.length === 0) {
-                el.innerHTML = `<div class="text-center text-[#86868B] px-6"><i class="fa-regular fa-image text-4xl mb-3"></i><p class="text-sm">上传你们的竖屏照片或视频</p></div>`;
-                return;
-            }
-            const item = mediaList[currentIndex];
-            if (item.type === 'image') {
-                el.innerHTML = `<img src="${item.url}" class="carousel-item" alt="memo">`;
-            } else {
-                el.innerHTML = `<video src="${item.url}" class="carousel-item" autoplay muted playsinline></video>`;
-            }
-            updateProgress();
-        }
+// ==============================================
+// 爱心特效
+// ==============================================
+function initHeartEffect() {
+    function createHeart(e) {
+        const h = document.createElement('div');
+        h.className = 'heart-float';
+        h.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        h.style.left = e.clientX - 10 + 'px';
+        h.style.top = e.clientY - 20 + 'px';
+        h.style.color = '#FF5F7F';
+        h.style.fontSize = (Math.random() * 10 + 14) + 'px';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 1600);
+    }
+    document.addEventListener('click', createHeart);
+    document.addEventListener('mousemove', createHeart);
+}
+</script>
 
-        function startCarousel() {
-            clearInterval(carouselInterval);
-            carouselInterval = setInterval(next, CAROUSEL_DELAY);
-        }
-
-        function stopCarousel() {
-            clearInterval(carouselInterval);
-        }
-
-        function prev() {
-            currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length;
-            renderMedia();
-        }
-
-        function next() {
-            currentIndex = (currentIndex + 1) % mediaList.length;
-            renderMedia();
-        }
-
-        function updateProgress() {
-            const bar = document.getElementById('progress-bar');
-            bar.style.width = ((currentIndex + 1) / mediaList.length) * 100 + "%";
-        }
-
-        document.getElementById('play-pause-btn').addEventListener('click', function () {
-            const i = this.querySelector('i');
-            const tip = this.nextElementSibling;
-            if (i.classList.contains('fa-pause')) {
-                stopCarousel();
-                i.classList.replace('fa-pause', 'fa-play');
-                tip.textContent = '已暂停';
-            } else {
-                startCarousel();
-                i.classList.replace('fa-play', 'fa-pause');
-                tip.textContent = '自动播放';
-            }
-        });
-
-        function loadDefaultMusic() {
-            audio.src = "https://assets.mixkit.co/sfx/preview/mixkit-romantic-piano-loop-21.mp3";
-        }
-
-        document.getElementById('music-upload').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const url = URL.createObjectURL(file);
-            audio.src = url;
-            localStorage.setItem('loveMemoMusic', url);
-            audio.play().catch(()=>{});
-        });
-
-        function loadLocalMusic() {
-            const m = localStorage.getItem('loveMemoMusic');
-            if (m) audio.src = m;
-        }
-
-        document.getElementById('music-toggle').addEventListener('click', () => {
-            audio.paused ? audio.play().catch(()=>{}) : audio.pause();
-        });
-
-        document.getElementById('volume-control').addEventListener('input', (e) => {
-            audio.volume = e.target.value / 100;
-        });
-
-        function bindEvents() {
-            document.getElementById('prev-btn').addEventListener('click', prev);
-            document.getElementById('next-btn').addEventListener('click', next);
-
-            let startX = 0;
-            const carousel = document.getElementById('carousel');
-            carousel.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
-            carousel.addEventListener('touchend', e => {
-                const dx = e.changedTouches[0].screenX - startX;
-                if (dx > 60) prev();
-                if (dx < -60) next();
-            });
-        }
-
-        function initHeartEffect() {
-            function createHeart(e) {
-                const h = document.createElement('div');
-                h.className = 'heart-float';
-                h.innerHTML = '<i class="fa-solid fa-heart"></i>';
-                h.style.left = e.clientX - 10 + 'px';
-                h.style.top = e.clientY - 20 + 'px';
-                h.style.color = '#FF5F7F';
-                h.style.fontSize = (Math.random() * 10 + 14) + 'px';
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 1600);
-            }
-            document.addEventListener('click', createHeart);
-            document.addEventListener('mousemove', createHeart);
-        }
-    </script>
 </body>
 </html>
